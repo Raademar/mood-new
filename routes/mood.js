@@ -14,13 +14,22 @@ router.post('/', function(req, res){
   note: req.body.note,
   date: curDate,
 })
-  mood.save(function(err){
-    if(err) {
-      console.log(err)
-    } else {
-      console.log('Mood saved')
-    }
+  mood.save()
+  .then(response => {
+    console.log('this far')
+    //res.send('item saved to database!')
   })
+  .catch(error => {
+    console.log('not working.. this far')
+    res.status(400).send('unable to save to database.')
+  })
+  //(function(err){
+  //   if(err) {
+  //     console.log(err)
+  //   } else {
+  //     console.log('Mood saved')
+  //   }
+  // })
     res.redirect('/')
 })
 

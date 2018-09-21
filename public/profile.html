@@ -4,21 +4,48 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="../stylesheets/styles.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+  <link rel="stylesheet" href="../stylesheets/profile-styles.css">
   <base href="/" />
   <title>Profile</title>
 </head>
 <body>
-  <section class="profile-first-section">
-    <h1 class="profile-h1"></h1>
-    <div class="lineChartContainer">
-      <canvas id="lineChart"></canvas>
+  <section class="profile-landing">
+    <div class="left-content">
+      <div class="left-title">
+        <h1>your mood</h1>
+      </div>
+      <div class="left-subheading">
+        <h3>see how you have been feeling lately</h3>
+      </div>
+      <div class="left-paragraph">
+        <p>choose from the alternatives below</p>
+      </div>
+      <div class="left-radios">
+        <input type="radio" name="radio" value="year" id="radio-year" checked>
+        <label for="year">year</label>
+        <input type="radio" name="radio" value="month" id="radio-month">
+        <label for="month">month</label>
+        <input type="radio" name="radio" value="week" id="radio-week">
+        <label for="week">week</label>
+      </div>
+      <div class="lineChartContainer">
+        <canvas id="lineChart"></canvas>
+      </div>
     </div>
-    <div class="pieChartContainer">
-      <canvas id="pieChart"></canvas>
+    <div class="right-content">
+      <div class="right-title">
+        <h1>world mood</h1>
+      </div>
     </div>
   </section>
 </body>
 <script type="text/javascript" src="/dist/profile.js"></script>
 </body>
 </html>
+
+
+<!-- 
+<div class="pieChartContainer">
+  <canvas id="pieChart"></canvas>
+</div> -->

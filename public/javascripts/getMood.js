@@ -20,15 +20,15 @@ let myChart = new Chart(ctx, {
       datasets: [{
           label: [],
           data: moodArray,
-          backgroundColor: 'rgba(255, 99, 132, 0.8)',
-          borderColor: 'rgba(255,99,132,1)',
+          backgroundColor: '#EC7357',
+          borderColor: '#F3CA40',
           borderWidth: 1
       }]
   },
   options: {
       title: {
         display: true,
-        text: 'Line Chart'
+        text: ''
       },
       legend: {
           labels: {

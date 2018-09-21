@@ -50,9 +50,9 @@ function postData(userMoodEntry, userMoodNote){
       'Content-Type': 'application/json',
     },
   })
-  .then(res => res.json())
-  .then(response => console.log('Success:', JSON.stringify(response)))
-  .catch(error => console.error('Error:', error))
+  .then(res => {
+    console.log('Hyeo this far')
+  })
 }
 
 let pickedMood = 0;

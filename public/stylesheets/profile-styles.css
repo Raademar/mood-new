@@ -1,0 +1,60 @@
+* {
+  font-family: 'Roboto Slab', serif;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  color: #f9f6f0;
+}
+.profile-landing {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  background-color: #6163F5;
+  background-image: linear-gradient(-60deg, rgba(154, 110, 242, 0), rgb(154, 110, 242) 40%, rgb(154, 110, 242) 60%, rgba(154, 110, 242, 0));
+}
+
+.left-content {
+  height: 100vh;
+  width: 50vw;
+  border-right: 1px solid rgba(211, 208, 203, 0.3);
+}
+
+.right-content {
+  height: 100vh;
+  width: 50vw;
+}
+
+.left-title {
+  display: flex;
+  justify-content: flex-start;
+  font-size: 1.5rem;
+}
+.right-title {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 1.5rem;
+}
+
+.left-title h1, .right-title h1 {
+  padding: 1rem;
+  font-weight: 100;
+}
+.left-subheading {
+  padding-left: 1rem;
+  font-size: 1.2rem;
+}
+.left-subheading h3 {
+  font-weight: 100;
+}
+.left-paragraph {
+  padding-left: 1rem;
+}
+.left-paragraph p {
+font-weight: 100;
+}
+.left-radios {
+  padding-left: 1rem;
+}
