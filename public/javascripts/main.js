@@ -38,6 +38,10 @@ function setLocalStorage(userMoodEntry, userMoodNote){
 
 // Fucntion for passing user submitted mood data to the DB.
 function postData(data){
+  let userData = {
+    mood: pickedMood,
+    note: moodNote
+  }
   return fetch('/mood/add', {
     method: 'POST',
     body: JSON.stringify(data),
@@ -55,10 +59,7 @@ let pickedMood = 0;
 let moodNote = '';
 let userMood = [];
 
-let userData = {
-  'mood': pickedMood,
-  'note': moodNote
-}
+
 
 // Get the median mood value from the userMood array.
 const userMedianMood = arr => arr.reduce((a,b) => a + b, 0) / userMood.length;
