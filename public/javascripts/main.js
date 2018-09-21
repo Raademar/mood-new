@@ -36,16 +36,30 @@ function setLocalStorage(userMoodEntry, userMoodNote){
   localStorage.setItem('userentry', JSON.stringify(userMoodArray));
 };
 
-// THIS IS NOT WORKING, COME UP WITH NEW SOLUTION
-
-// async function insertIntoDB(userMoodEntry, userMoodNote){
-//   const r = await db.collection('userentries').insertOne({date: curDate ,mood: userMoodEntry, note: userMoodNote});
-//   assert.equal(1, r.insertedCount);
-// };
+// Fucntion for passing user submitted mood data to the DB.
+function postData(userMoodEntry, userMoodNote){
+  let userData = {
+    mood: userMoodEntry,
+    note: userMoodNote
+  }
+  return fetch('/mood/add', {
+    method: 'POST',
+    body: JSON.stringify(userData),
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+  })
+  .then(res => res.json())
+  .then(response => console.log('Success:', JSON.stringify(response)))
+  .catch(error => console.error('Error:', error))
+}
 
 let pickedMood = 0;
 let moodNote = '';
 let userMood = [];
+
+
 
 // Get the median mood value from the userMood array.
 const userMedianMood = arr => arr.reduce((a,b) => a + b, 0) / userMood.length;
@@ -65,7 +79,7 @@ smileys.forEach(smiley => smiley.addEventListener('click', function(){
 submitFeeligns.addEventListener('click', function(){
   moodNote = JSON.stringify(moodNoteTextarea.value);
   setLocalStorage(pickedMood, moodNote);
-  // insertIntoDB(pickedMood, moodNote);
+  postData(pickedMood, moodNote)
   moodNoteTextarea.value = '';
   pickedMood = 0;
   toggleModal();

@@ -9,18 +9,19 @@ const curDate = new Date().toJSON().slice(0,10).replace(/-/g,'/');
 let Mood = require('./../db/models/moods')
 
 router.post('/', function(req, res){
-  let mood = new Mood()
-  mood.mood = 1
-  mood.note = req.body.note
-  mood.date = curDate
-
+  let mood = new Mood({
+  mood: req.body.mood,
+  note: req.body.note,
+  date: curDate,
+})
   mood.save(function(err){
     if(err) {
       console.log(err)
     } else {
-      res.redirect('/')
+      console.log('Mood saved')
     }
   })
+    res.redirect('/')
 })
 
 module.exports = router
