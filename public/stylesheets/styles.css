@@ -19,8 +19,8 @@ body {
 
 .first-section {
   background: #79C99E;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #79C99E, #508484);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #EC7357, #F3CA40); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background-color: #6163F5;
+  background-image: linear-gradient(-60deg, rgba(154, 110, 242, 0), rgb(154, 110, 242) 40%, rgb(154, 110, 242) 60%, rgba(154, 110, 242, 0));
   height: 95vh;
 }
 
