@@ -36,7 +36,7 @@ function setLocalStorage(userMoodEntry, userMoodNote){
   localStorage.setItem('userentry', JSON.stringify(userMoodArray));
 };
 
-// Fucntion for passing user submitted mood data to the DB.
+// Function for passing user submitted mood data to the DB.
 function postData(userMoodEntry, userMoodNote){
   let userData = {
     mood: userMoodEntry,

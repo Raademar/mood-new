@@ -11,32 +11,36 @@
 </head>
 <body>
   <section class="profile-landing">
-    <div class="left-content">
-      <div class="left-title">
+    <div class="content">
+      <div class="title">
         <h1>your mood</h1>
       </div>
-      <div class="left-subheading">
+      <div class="subheading">
         <h3>see how you have been feeling lately</h3>
       </div>
-      <div class="left-paragraph">
+      <div class="paragraph">
         <p>choose from the alternatives below</p>
       </div>
-      <div class="left-radios">
-        <input type="radio" name="radio" value="year" id="radio-year" checked>
-        <label for="year">year</label>
-        <input type="radio" name="radio" value="month" id="radio-month">
-        <label for="month">month</label>
-        <input type="radio" name="radio" value="week" id="radio-week">
-        <label for="week">week</label>
+      <div class="radios">
+        <label class="container">year
+          <input type="radio" name="radio" value="year" id="radio-year" checked="checked">
+          <span class="checkmark"></span>
+        </label>
+        <label class="container">month
+          <input type="radio" name="radio" value="month" id="radio-month" checked="checked">
+          <span class="checkmark"></span>
+        </label>
+        <label class="container">week
+          <input type="radio" name="radio" value="week" id="radio-week" checked="checked">
+          <span class="checkmark"></span>
+        </label>
       </div>
-      <div class="lineChartContainer">
-        <canvas id="lineChart"></canvas>
+      <div class="chart-holder">
+        <div class="lineChartContainer">
+          <canvas id="lineChart"></canvas>
+        </div>
       </div>
-    </div>
-    <div class="right-content">
-      <div class="right-title">
-        <h1>world mood</h1>
-      </div>
+
     </div>
   </section>
 </body>
