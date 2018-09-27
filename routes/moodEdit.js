@@ -8,11 +8,11 @@ const options = {
 const curDate = new Date().toJSON().slice(0,10).replace(/-/g,'/');
 let Mood = require('./../db/models/moods')
 
-router.post('/', function(req, res){
+router.get('/', function(req, res){
   let mood = new Mood({
   mood: req.body.mood,
   note: req.body.note,
-  date: curDate,
+  date: req.body.date
 })
   mood.save()
   .then(response => {
