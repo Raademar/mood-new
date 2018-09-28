@@ -16,11 +16,10 @@ router.post('/', function(req, res){
 })
   mood.save()
   .then(response => {
-    console.log('this far')
-    //res.send('item saved to database!')
+    console.log('item saved to database!')
   })
   .catch(error => {
-    console.log('not working.. this far')
+    console.log(error, 'not working.. this far')
     res.status(400).send('unable to save to database.')
   })
   //(function(err){

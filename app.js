@@ -6,8 +6,14 @@ const bodyParser = require('body-parser')
 
 // Set up DB connection
 const mongoose = require('mongoose')
-const mongoDB = 'mongodb://localhost:27017/mood-new'
-mongoose.connect(mongoDB)
+mongoose.connect('mongodb://localhost:27017/mood-new', (err, res) => {
+  if(err) {
+    console.log(err);
+  }
+  else {
+    console.log('connected');
+  }
+})
 const db = mongoose.connection;
 
 // Check for connection
