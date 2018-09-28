@@ -8,18 +8,18 @@ const options = {
 const curDate = new Date().toJSON().slice(0,10).replace(/-/g,'/');
 let Mood = require('./../db/models/moods')
 
-router.post('/', function(req, res){
+router.get('/', function(req, res){
   let mood = new Mood({
   mood: req.body.mood,
   note: req.body.note,
-  date: curDate,
+  date: req.body.date
 })
   mood.save()
   .then(response => {
-    console.log('item saved to database!')
+    console.log('mood saved to database.')
   })
   .catch(error => {
-    console.log(error, 'not working.. this far')
+    console.log('not working.. this far')
     res.status(400).send('unable to save to database.')
   })
 
