@@ -133,23 +133,27 @@ TypeWriter.prototype.type = function() {
   const current = this.wordIndex % this.words.length
   // Get full text of current word
   const fullTxt = this.words[current]
+  // Get the cursor
+  let cursor = window.getComputedStyle(
+    document.getElementById('main-header'), ':after')
+  
 
   // Check if deleting
   if(this.isDeleting) {
     // Delete a character
     this.txt = fullTxt.substring(0, this.txt.length - 1)
+    // Hide the cursor when typing
+    cursor = ''
   } else {
     // Add a character
     this.txt = fullTxt.substring(0, this.txt.length + 1)
+    // Hide the cursor when typing
+    cursor = ''
   }
 
   // Insert txt into element
   this.txtElement.innerHTML = `<span class="txt">${this.txt}</span>`
-  const cursor = document.querySelector('.txt')
-  // Make cursor blink
-  function cursorBlinker() {
-    cursor.classList.toggle('hideCursor')
-  }
+  
 
   // Initial Type speed
   let typeSpeed = 300
@@ -162,7 +166,8 @@ TypeWriter.prototype.type = function() {
   if(!this.isDeleting && this.txt === fullTxt) {
     // Make a pause at the end of each word
     typeSpeed = this.wait
-    //setInterval(cursorBlinker, 200)
+    // Show the cursor when not typing
+
     // Set delete to true
     this.isDeleting = true
   } else if(this.isDeleting && this.txt === '') {
@@ -171,7 +176,7 @@ TypeWriter.prototype.type = function() {
     this.wordIndex++
     // Pause before new word starts typing
     typeSpeed = 500
-    //setInterval(cursorBlinker, 200)
+    
   }
   setTimeout(() => this.type(), typeSpeed)
 }
@@ -181,7 +186,7 @@ document.addEventListener('DOMContentLoaded', init)
 
 // Init app
 function init() {
-  const txtElement = document.querySelector('.txt-type')
+  const txtElement = document.querySelector('.main-header')
   const words = JSON.parse(txtElement.getAttribute('data-words'))
   const wait = txtElement.getAttribute('data-wait')
   // Init Typewriter

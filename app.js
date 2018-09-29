@@ -2,12 +2,37 @@ const express = require('express')
 const path = require('path')
 const _ = require('lodash')
 const bodyParser = require('body-parser')
-const cors = require('cors')
 const session = require('express-session')
-const expressValidator = require('express-validator')
-const flash = require('connect-flash')
-const errorHandler = require('errorhandler')
+const uuid = require('uuid/v4')
+const FileStore = require('session-file-store')(session)
+const passport = require('passport')
+const LocalStrategy = require('passport-local').Strategy
 
+const users = [
+  {id: '2f24vvg', email: 'test@test.com', password: 'password'}
+]
+
+// Config passport to use local strategy
+passport.use(new LocalStrategy(
+  { usernameField: 'email' },
+  (email, password, done) => {
+    console.log('Inside local strategy callback')
+    // here is where you make a call to the database
+    // to find the user based on their username or email address
+    // for now, we'll just pretend we found that it was users[0]
+    const user = users[0] 
+    if(email === user.email && password === user.password) {
+      console.log('Local strategy returned true')
+      return done(null, user)
+    }
+  }
+))
+
+// tell passport how to serialize the user
+passport.serializeUser((user, done) => {
+  console.log('Inside serializeUser callback. User id is save to the session file store here')
+  done(null, user.id);
+});
 
 
 // Set up DB connection
@@ -39,37 +64,19 @@ app.use(express.static('public'))
 
 //Express session middleware
 app.use(session({
-  secret: 'hanip',
+  genid: (req) => {
+    console.log('Inside session middleware genid function')
+    console.log(`Request object sessionID from client: ${req.sessionID}`)
+    return uuid() // use UUIDs for session IDs
+  },
+  store: new FileStore(),
+  secret: 'keyboard cat',
   resave: false,
-  saveUninitialized: true,
-  cookie: { secure: true }
+  saveUninitialized: true
 }))
+app.use(passport.initialize())
+app.use(passport.session())
 
-// Express Messages Middleware
-app.use(require('connect-flash')());
-app.use(function (req, res, next) {
-  res.locals.messages = require('express-messages')(req, res);
-  next();
-});
-
-
-// Express Validator Middleware
-app.use(expressValidator({
-  errorFormatter: function(param, msg, value) {
-    var namespace = param.split('.')
-    , root = namespace.shift()
-    , formParam = root
-    
-    while(namespace.length) {
-      formParam += '[' + namespace.shift() + ']'
-    }
-    return {
-      param: formParam,
-      msg: msg,
-      value: value
-    }
-  }
-}))
 
 // Body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -87,12 +94,14 @@ const profileRoute = require('./routes/profile')
 const moodRoute = require('./routes/mood')
 const moodRouteEdit = require('./routes/moodEdit')
 const apiRoute = require('./routes/api')
+const loginRoute = require('./routes/login')
 
 app.use('/', indexRoute)
 app.use('/profile', profileRoute)
 app.use('/mood/add', moodRoute)
 app.use('/mood/edit/:id', moodRouteEdit)
 app.use('/api', apiRoute)
+app.use('/login', loginRoute)
 
 
 // Run server
