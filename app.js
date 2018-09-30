@@ -31,21 +31,28 @@ passport.use(new LocalStrategy(
 // tell passport how to serialize the user
 passport.serializeUser((user, done) => {
   console.log('Inside serializeUser callback. User id is save to the session file store here')
-  done(null, user.id);
-});
+  done(null, user.id)
+})
+
+passport.deserializeUser((id, done) => {
+  console.log('Inside deserializeUser callback')
+  console.log(`The user id passport saved in the session file store is: ${id}`)
+  const user = users[0].id === id ? users[0] : false
+  done(null, user)
+})
 
 
 // Set up DB connection
 const mongoose = require('mongoose')
 mongoose.connect('mongodb://localhost:27017/mood-new', (err, res) => {
   if(err) {
-    console.log(err);
+    console.log(err)
   }
   else {
-    console.log('connected');
+    console.log('connected')
   }
 })
-const db = mongoose.connection;
+const db = mongoose.connection
 
 // Check for connection
 db.once('open', function(){
@@ -92,6 +99,7 @@ const moodRoute = require('./routes/mood')
 const moodRouteEdit = require('./routes/moodEdit')
 const apiRoute = require('./routes/api')
 const loginRoute = require('./routes/login')
+const authRoute = require('./routes/auth')
 
 app.use('/', indexRoute)
 app.use('/profile', profileRoute)
@@ -99,6 +107,7 @@ app.use('/mood/add', moodRoute)
 app.use('/mood/edit/:id', moodRouteEdit)
 app.use('/api', apiRoute)
 app.use('/login', loginRoute)
+app.use('/authrequired', authRoute)
 
 
 // Run server
