@@ -85,10 +85,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 
-
 // set up routes & models
-
-//require('./config/passport')
 const indexRoute = require('./routes/index')
 const profileRoute = require('./routes/profile')
 const moodRoute = require('./routes/mood')
