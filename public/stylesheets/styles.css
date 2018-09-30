@@ -18,6 +18,10 @@ body {
   display: none;
 }
 
+.hideCursor {
+  visibility: hidden;
+}
+
 .first-section {
   height: 95vh;
   width: 100vw;
