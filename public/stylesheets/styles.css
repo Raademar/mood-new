@@ -499,6 +499,7 @@ REGISTER STYLES
 .sign-up-container {
   display: flex;
   justify-content: center;
+  align-content: center;
   width: 100vw;
   height: auto;
 }
@@ -507,8 +508,8 @@ REGISTER STYLES
   background-color: #f9f6f0;
   border-radius: 5px;
   width: 25vw;
-  height: 50vh;
-  
+  height: auto;
+  max-height: 35vh;
 }
 
 /* 
