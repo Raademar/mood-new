@@ -8,6 +8,7 @@ mode: 'development',
   entry: {
     index: './public/javascripts/main.js',
     profile: './public/javascripts/getMood.js',
+    register: './public/javascripts/register.js',
   },
   output: {
     filename: '[name].js',

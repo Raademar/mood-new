@@ -9,8 +9,6 @@ const options = {
 }
 
 router.get('/', function(req, res){
-  console.log('Inside GET /authrequired callback ')
-  console.log(`User authenticated? ${req.isAuthenticated()}`)
   if(req.isAuthenticated()) {
     res.send('You hit the authentication endpoint \n')
   } else {

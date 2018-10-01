@@ -11,6 +11,7 @@
   "author": "Mattias Rådemar",
   "license": "MIT",
   "dependencies": {
+    "bcrypt": "^3.0.1",
     "body-parser": "^1.18.3",
     "chart.js": "^2.7.2",
     "connect-flash": "^0.1.1",

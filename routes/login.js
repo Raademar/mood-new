@@ -9,22 +9,25 @@ const options = {
 }
 
 router.get('/', function(req, res){
-  console.log('Inside GET /login callback function')
   console.log(req.sessionID)
-  res.send(`You got the login page!\n`)
 })
 
 router.post('/', (req, res, next) => {
-  console.log('Inside POST /login callback function')
   passport.authenticate('local', (err, user, info) => {
-    console.log('inside the passport.authentication() callback')
-    console.log(`req.session.passport: ${JSON.stringify(req.session.passport)}`)
-    console.log(`req.user: ${JSON.stringify(req.user)}`)
+    if(info) {
+      return res.send(info.message)
+     }
+     if(err) {
+       return next(err)
+     }
+     if(!user) {
+       return res.redirect('/login')
+     }
     req.login(user, (err) => {
-      console.log('Inside req.login() callback')
-      console.log(`req.session.passport: ${JSON.stringify(req.session.passport)}`)
-      console.log(`req.user: ${JSON.stringify(req.user)}`)
-      return res.send('You were authenticated & logged in!\n')
+      if(err) {
+        return next(err)
+      }
+      return res.redirect('/authrequired')
     })
   })(req, res, next)
 })
