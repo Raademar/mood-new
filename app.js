@@ -3,13 +3,11 @@ const path = require('path')
 const _ = require('lodash')
 const bodyParser = require('body-parser')
 const session = require('express-session')
+const expressValidator = require('express-validator')
 const uuid = require('uuid/v4')
 const FileStore = require('session-file-store')(session)
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
-
-
-
 
 
 // Set up DB connection
@@ -34,11 +32,10 @@ db.on('error', function(err){
   console.log(err)
 })
 
-
 // Init app
 const app = express()
 app.use(express.static('public'))
-
+app.use(expressValidator())
 //Express session middleware
 app.use(session({
   genid: (req) => {
@@ -50,11 +47,12 @@ app.use(session({
   saveUninitialized: true
 }))
 
-
+require('./config/passport')(passport)
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }))
-
 // parse application/json
 app.use(bodyParser.json())
 
