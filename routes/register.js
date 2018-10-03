@@ -50,7 +50,7 @@ router.post('/', function(req, res){
             console.log(err)
             return
           } else {
-            console.log('User registered and saved to database.')
+            console.log(`User ${user.email} registered and saved to database.`)
             return res.redirect( 301, '/')
           }
         })

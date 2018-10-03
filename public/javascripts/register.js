@@ -21,6 +21,4 @@ function postData(){
   })
 }
 
-submitNewUser.addEventListener('click', function(){
-  postData()
-})
+submitNewUser.addEventListener('click', () => postData())
