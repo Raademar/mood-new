@@ -18,24 +18,24 @@ router.get('/', function(req, res){
 // Post to register function
 router.post('/', function(req, res){
 
+  const email = req.body.email;
+  const password = req.body.password;
+  const password2 = req.body.password2;
+
   req.checkBody('email', 'Email is required').notEmpty()
   req.checkBody('email', 'Email is not valid').isEmail()
   req.checkBody('password', 'Password is required').notEmpty()
   req.checkBody('password2', 'Passwords do not match').equals(req.body.password)
 
   let errors = req.validationErrors()
-
-  if(done) {
-    console.log('went wrong here')
-    res.sendFile('/register.html', options,  {
+  if(errors) {
+    res.sendFile('/index.html', options,  {
       errors:errors
     })
-    return done(err)
   } else {
     let user = new User({
       email: email,
       password: password,
-      password2: password2,
       date: curDate,
     })
 
@@ -51,13 +51,12 @@ router.post('/', function(req, res){
             return
           } else {
             console.log('User registered and saved to database.')
-            res.redirect('/')
+            return res.redirect( 301, '/')
           }
         })
       })
     })
   }
-    
 })
 
 module.exports = router

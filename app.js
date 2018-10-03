@@ -36,6 +36,11 @@ db.on('error', function(err){
 const app = express()
 app.use(express.static('public'))
 app.use(expressValidator())
+// Body parser middleware
+app.use(bodyParser.urlencoded({ extended: false }))
+// parse application/json
+app.use(bodyParser.json())
+
 //Express session middleware
 app.use(session({
   genid: (req) => {
@@ -51,10 +56,6 @@ require('./config/passport')(passport)
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Body parser middleware
-app.use(bodyParser.urlencoded({ extended: false }))
-// parse application/json
-app.use(bodyParser.json())
 
 
 // set up routes & models

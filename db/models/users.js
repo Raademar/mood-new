@@ -11,10 +11,6 @@ const UserSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  password2: {
-    type: String,
-    required: true
-  },
   date: {
     type: String,
     required: false
