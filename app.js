@@ -48,8 +48,8 @@ app.use(session({
 }))
 
 require('./config/passport')(passport)
-app.use(passport.initialize());
-app.use(passport.session());
+app.use(passport.initialize())
+app.use(passport.session())
 
 // Body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }))

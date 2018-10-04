@@ -1,6 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const bcrypt = require('bcryptjs')
+const passport = require('passport');
 const router = express.Router()
 
 
@@ -23,14 +24,12 @@ router.post('/', function(req, res){
   req.checkBody('password', 'Password is required').notEmpty()
   req.checkBody('password2', 'Passwords do not match').equals(req.body.password)
 
-  let errors = req.validationErrors()
+  const errors = req.validationErrors()
 
-  if(done) {
-    console.log('went wrong here')
+  if(errors) {
     res.sendFile('/register.html', options,  {
       errors:errors
     })
-    return done(err)
   } else {
     let user = new User({
       email: email,
@@ -44,7 +43,7 @@ router.post('/', function(req, res){
           console.log(err)
         }
         user.password = hash
-        user.save(function(err){
+        user.create(function(err){
           if (err) {
             console.log(err)
             return

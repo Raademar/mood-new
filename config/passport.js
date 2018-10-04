@@ -5,14 +5,15 @@ const bcrypt = require('bcryptjs')
 module.exports = function(passport){
   // Local Strategy
   passport.use(new LocalStrategy(
-    { usernameField: 'email' },
-    (email, password, done) => {
+    { passReqToCallback: true,
+      usernameField: 'email' },
+    (req, email, password, done) => {
   // Match Username
   let query = {email:email}
   User.findOne(query, function(err, user){
     if(err) throw err
     if(!user){
-      return done(null, false, {message: 'No user found'});
+      return done(null, false, {message: 'No user found'})
     }
 
     // Match Password
@@ -21,14 +22,14 @@ module.exports = function(passport){
       if(isMatch){
         return done(null, user)
       } else {
-        return done(null, false, {message: 'Wrong password'});
+        return done(null, false, {message: 'Wrong password'}) 
       }
     })
   })
   }))
 
   passport.serializeUser(function(user, done) {
-  done(null, user.id)
+    done(null, user.id)
   })
 
   passport.deserializeUser(function(id, done) {
