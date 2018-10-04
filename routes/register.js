@@ -19,22 +19,25 @@ router.get('/', function(req, res){
 // Post to register function
 router.post('/', function(req, res){
 
+  const email = req.body.email;
+  const password = req.body.password;
+  const password2 = req.body.password2;
+
   req.checkBody('email', 'Email is required').notEmpty()
   req.checkBody('email', 'Email is not valid').isEmail()
   req.checkBody('password', 'Password is required').notEmpty()
   req.checkBody('password2', 'Passwords do not match').equals(req.body.password)
 
-  const errors = req.validationErrors()
-
+  let errors = req.validationErrors()
   if(errors) {
-    res.sendFile('/register.html', options,  {
+    res.sendFile('/index.html', options,  {
       errors:errors
     })
   } else {
     let user = new User({
       email: email,
       password: password,
-      date: curDate,  
+      date: curDate,
     })
 
     bcrypt.genSalt(10, function(err, salt){
@@ -48,14 +51,13 @@ router.post('/', function(req, res){
             console.log(err)
             return
           } else {
-            console.log('User registered and saved to database.')
-            res.redirect('/')
+            console.log(`User ${user.email} registered and saved to database.`)
+            return res.redirect( 301, '/')
           }
         })
       })
     })
   }
-    
 })
 
 module.exports = router

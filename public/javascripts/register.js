@@ -7,9 +7,9 @@ const userPassword2 = document.querySelector('#user-password2')
 // Function for passing user info to the register route.
 function postData(){
   let userRegisterData = {
-    email: JSON.stringify(userEmail.value),
-    password: JSON.stringify(userPassword.value),
-    password2: JSON.stringify(userPassword2.value),
+    email: userEmail.value,
+    password: userPassword.value,
+    password2: userPassword2.value,
   }
   return fetch('/register', {
     method: 'POST',
@@ -21,6 +21,4 @@ function postData(){
   })
 }
 
-submitNewUser.addEventListener('click', function(){
-  postData()
-})
+submitNewUser.addEventListener('click', () => postData())
