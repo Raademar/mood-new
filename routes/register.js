@@ -17,7 +17,7 @@ router.get('/', function(req, res){
 })
 
 // Post to register function
-router.post('/', function(req, res){
+router.post('/', async function(req, res){
 
   const email = req.body.email;
   const password = req.body.password;
@@ -30,7 +30,8 @@ router.post('/', function(req, res){
 
   let errors = req.validationErrors()
   if(errors) {
-    res.status(500).send({errors: errors})
+    res.status(500).send(errors[0])
+    console.log(errors[0].msg)
   } else {
     let user = new User({
       email: email,
@@ -38,7 +39,7 @@ router.post('/', function(req, res){
       date: curDate,
     })
 
-    bcrypt.genSalt(10, function(err, salt){
+    await bcrypt.genSalt(10, function(err, salt){
       bcrypt.hash(user.password, salt, function(err, hash){
         if(err) {
           console.log(err)
@@ -46,7 +47,7 @@ router.post('/', function(req, res){
         user.password = hash
         user.save(function(err){
           if (err) {
-            res.status(500).send({error:error})
+            res.status(500).send(error)
             return
           } else {
             res.status(200).send({"message": "User saved okey"})
