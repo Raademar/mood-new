@@ -18,6 +18,14 @@ function postData(){
       'Accept': 'application/json',
       'Content-Type': 'application/json',
     },
+  }).then(function(response){
+    if(response.ok){
+      console.log('Request went away ok!')
+      return response.blob()
+    }
+    throw new Error('Network repsonse was not ok')
+  }).then(function(){
+    console.log('Something went wrong with the POST /register request.')
   })
 }
 

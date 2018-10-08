@@ -46,13 +46,13 @@ router.post('/', function(req, res){
           console.log(err)
         }
         user.password = hash
-        user.create(function(err){
+        user.save(function(err){
           if (err) {
             console.log(err)
             return
           } else {
             console.log(`User ${user.email} registered and saved to database.`)
-            return res.redirect( 301, '/')
+            
           }
         })
       })
