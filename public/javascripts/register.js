@@ -13,20 +13,17 @@ function postData(){
   }
   return fetch('/register', {
     method: 'POST',
+    credentials: 'include',
     body: JSON.stringify(userRegisterData),
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
+      
     },
-  }).then(function(response){
-    if(response.ok){
-      console.log('Request went away ok!')
-      return response.blob()
-    }
-    throw new Error('Network repsonse was not ok')
-  }).then(function(){
-    console.log('Something went wrong with the POST /register request.')
-  })
+    redirect: 'follow',
+  }).then(res => res.json())
+  .then(response => console.log(JSON.stringify(response)))
+  .catch(error => console.error('This is the response from the server. Error:', error))
 }
 
 submitNewUser.addEventListener('click', () => postData())

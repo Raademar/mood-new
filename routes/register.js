@@ -30,9 +30,7 @@ router.post('/', function(req, res){
 
   let errors = req.validationErrors()
   if(errors) {
-    res.sendFile('/index.html', options,  {
-      errors:errors
-    })
+    res.status(500).send({errors: errors})
   } else {
     let user = new User({
       email: email,
@@ -48,11 +46,11 @@ router.post('/', function(req, res){
         user.password = hash
         user.save(function(err){
           if (err) {
-            console.log(err)
+            res.status(500).send({error:error})
             return
           } else {
+            res.status(200).send({"message": "User saved okey"})
             console.log(`User ${user.email} registered and saved to database.`)
-            
           }
         })
       })

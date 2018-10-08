@@ -7,8 +7,6 @@ const uniqueId = uuid()
 router.use(function (req, res, next){
   const now = new Date()
   console.log('Time: ', now)
-  console.log('Inside the homepage callback function')
-  console.log(req.sessionID)
   next()
 })
 
