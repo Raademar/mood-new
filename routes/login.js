@@ -9,7 +9,7 @@ const options = {
 }
 
 router.get('/', function(req, res){
-  console.log(req.sessionID)
+  res.send(console.log('/login here'))
 })
 
 router.post('/', (req, res, next) => {

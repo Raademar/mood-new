@@ -5,6 +5,7 @@ const userPassword2 = document.querySelector('#user-password2')
 const registerResponseText = document.querySelector('.responseText')
 
 
+
 // Function for passing user info to the register route.
 function postData(){
   let userRegisterData = {
@@ -25,8 +26,15 @@ function postData(){
   }).then(res => res.json())
   .then(function(response){ 
     if(response.message === 'User saved okey'){
+      registerResponseText.classList.toggle('.responseText')
+      registerResponseText.classList.add('responseTextSuccess')
       registerResponseText.textContent = (JSON.stringify(response.message))
+      setTimeout(function(){
+        window.location.replace("/index.html")
+      }, 3000)
     } else if(response[0].msg){
+      registerResponseText.classList.toggle('.responseText')
+      registerResponseText.classList.add('responseTextError')
       registerResponseText.textContent = (JSON.stringify(response[0].msg))
     }
   })

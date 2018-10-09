@@ -1,7 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const bcrypt = require('bcryptjs')
-const passport = require('passport');
+const passport = require('passport')
 const router = express.Router()
 
 
