@@ -10,7 +10,7 @@ const options = {
 
 router.get('/', function(req, res){
   if(req.isAuthenticated()) {
-    res.send('You hit the authentication endpoint \n')
+    res.send(200)
   } else {
     res.redirect('/')
   }

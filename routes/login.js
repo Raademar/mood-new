@@ -9,7 +9,7 @@ const options = {
 }
 
 router.get('/', function(req, res){
-  res.send(console.log('/login here'))
+  res.sendFile('/login.html', options)
 })
 
 router.post('/', (req, res, next) => {

@@ -52,7 +52,7 @@ router.post('/', async function(req, res){
             res.status(500).send(error)
             return
           } else {
-            res.status(200).send({"message": "User saved okey"})
+            res.status(200).send({message: "User saved okey"})
             console.log(`User ${user.email} registered and saved to database.`)
           }
         })

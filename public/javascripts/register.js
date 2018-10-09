@@ -25,7 +25,7 @@ function postData(){
     redirect: 'follow',
   }).then(res => res.json())
   .then(function(response){ 
-    if(response.message === 'User saved okey'){
+    if(response.message){
       registerResponseText.classList.toggle('.responseText')
       registerResponseText.classList.add('responseTextSuccess')
       registerResponseText.textContent = (JSON.stringify(response.message))

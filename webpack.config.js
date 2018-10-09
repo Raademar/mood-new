@@ -9,6 +9,7 @@ mode: 'development',
     index: './public/javascripts/main.js',
     profile: './public/javascripts/getMood.js',
     register: './public/javascripts/register.js',
+    login: './public/javascripts/login.js',
   },
   output: {
     filename: '[name].js',
