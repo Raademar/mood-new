@@ -29,9 +29,11 @@ router.post('/', async function(req, res){
   req.checkBody('password2', 'Passwords do not match').equals(req.body.password)
 
   let errors = req.validationErrors()
+  let msg
   if(errors) {
-    res.status(500).send(errors[0])
-    console.log(errors[0].msg)
+    ({ msg } = errors[0])
+    console.log(msg)
+    res.status(500).send(errors)
   } else {
     let user = new User({
       email: email,

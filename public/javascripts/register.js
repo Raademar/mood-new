@@ -2,6 +2,7 @@ const submitNewUser = document.querySelector('#submit-register')
 const userEmail = document.querySelector('#user-email')
 const userPassword = document.querySelector('#user-password')
 const userPassword2 = document.querySelector('#user-password2')
+const registerResponseText = document.querySelector('.responseText')
 
 
 // Function for passing user info to the register route.
@@ -22,7 +23,13 @@ function postData(){
     },
     redirect: 'follow',
   }).then(res => res.json())
-  .then(response => console.log(JSON.stringify(response)))
+  .then(function(response){ 
+    if(response.message === 'User saved okey'){
+      registerResponseText.textContent = (JSON.stringify(response.message))
+    } else if(response[0].msg){
+      registerResponseText.textContent = (JSON.stringify(response[0].msg))
+    }
+  })
   .catch(error => console.error('This is the response from the server. Error:', error))
 }
 
