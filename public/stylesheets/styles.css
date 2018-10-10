@@ -319,11 +319,11 @@ a:visited {
 }
 
 #footer {
-  padding-top: 75px;
-  background: #f9f6f0;
-  display: grid;
-  grid-template-rows: 1fr 2fr 1fr;
-  grid-template-columns: repeat(5, 1fr);
+  padding-top: 25px;
+  padding-bottom: 25px;
+  background: #fffdf8;
+  display: flex;
+  justify-content: space-around;
   font-size: 0.8rem;
 }
 
@@ -337,22 +337,6 @@ a:visited {
 
 #footer ul li {
   padding-top: 7px;
-}
-
-.footer-links {
-  grid-row: 2/4;
-}
-
-#footer-us-links {
-  grid-column: 3/4;
-}
-
-#footer-service-links {
-  grid-column: 4/5;
-}
-
-#footer-personal-links {
-  grid-column: 5/6;
 }
 
 #footer ul li:hover {

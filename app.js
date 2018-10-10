@@ -57,7 +57,6 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 
-
 // set up routes & models
 const indexRoute = require('./routes/index')
 const profileRoute = require('./routes/profile')

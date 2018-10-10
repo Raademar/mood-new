@@ -18,6 +18,9 @@ function postUserData(){
       
     },
     redirect: 'follow',
+  }).then(res => res.json())
+  .then(function(response){
+    window.location.replace("/index.html")
   })
 }
 // redirect depending on status from server.

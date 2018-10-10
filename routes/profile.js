@@ -6,7 +6,12 @@ const options = {
 }
 
 router.get('/', function(req, res){
-  res.sendFile('/profile.html', options)
+  if(req.isAuthenticated()) {
+    console.log(`${req.user.email} visited the profile page.`)
+    res.sendFile('/profile.html', options)
+  }else {
+    res.redirect('/login.html')
+  }
 })
 
 module.exports = router

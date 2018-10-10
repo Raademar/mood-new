@@ -10,7 +10,7 @@ const options = {
 
 router.get('/', function(req, res){
   if(req.isAuthenticated()) {
-    res.sendStatus(200)
+    res.redirect(200, '/')
     console.log(`${req.user.email} logged in.`)
   } else {
     res.redirect('/')

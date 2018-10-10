@@ -6,6 +6,13 @@ const moodLeadText = document.querySelector('#mood-lead');
 const userMoodContainer = document.querySelector('#user-mood-container');
 const moodNoteTextarea = document.querySelector('#mood-note');
 const submitFeeligns = document.querySelector('#submit-feelings');
+const loginButton = document.querySelector('#login-btn')
+
+
+// Check if user is logged in.
+if(isAuthenticated()){
+  loginButton.style.display = 'none'
+}
 
 // Function for toggling the modal >>> MOVE MODAL HERE <<<
 function enterFeelings(e) {

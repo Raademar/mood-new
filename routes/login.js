@@ -13,7 +13,8 @@ router.get('/', function(req, res){
 })
 
 router.post('/', (req, res, next) => {
-  passport.authenticate('local', (err, user, info) => {
+  passport.authenticate('local',
+    (err, user, info) => {
     if(info) {
       return res.send(info.message)
      }
@@ -27,7 +28,7 @@ router.post('/', (req, res, next) => {
       if(err) {
         return next(err)
       }
-      return res.redirect('/authrequired')
+      return res.redirect('/authrequired'+req.user)
     })
   })(req, res, next)
 })
