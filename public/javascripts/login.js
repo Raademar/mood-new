@@ -2,6 +2,7 @@ const submitNewUser = document.querySelector('#submit-register')
 const userEmail = document.querySelector('#user-email')
 const userPassword = document.querySelector('#user-password')
 
+
 // Function for passing user info to the login route.
 function postUserData(){
   let userLoginData = {
@@ -18,9 +19,6 @@ function postUserData(){
       
     },
     redirect: 'follow',
-  }).then(res => res.json())
-  .then(function(response){
-    window.location.replace("/index.html")
   })
 }
 // redirect depending on status from server.

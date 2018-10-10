@@ -9,10 +9,11 @@ const submitFeeligns = document.querySelector('#submit-feelings');
 const loginButton = document.querySelector('#login-btn')
 
 
+
 // Check if user is logged in.
-if(isAuthenticated()){
+/* if(user){
   loginButton.style.display = 'none'
-}
+} */
 
 // Function for toggling the modal >>> MOVE MODAL HERE <<<
 function enterFeelings(e) {

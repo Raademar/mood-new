@@ -46,7 +46,6 @@ app.use(session({
   genid: (req) => {
     return uuid() // use UUIDs for session IDs
   },
-  store: new FileStore(),
   secret: 'keyboard cat',
   resave: false,
   saveUninitialized: true
@@ -64,6 +63,7 @@ const moodRoute = require('./routes/mood')
 const moodRouteEdit = require('./routes/moodEdit')
 const apiRoute = require('./routes/api')
 const loginRoute = require('./routes/login')
+const logoutRoute = require('./routes/logout')
 const registerRoute = require('./routes/register')
 const authRoute = require('./routes/auth')
 
@@ -73,8 +73,10 @@ app.use('/mood/add', moodRoute)
 app.use('/mood/edit/:id', moodRouteEdit)
 app.use('/api', apiRoute)
 app.use('/login', loginRoute)
+app.use('/logout', logoutRoute)
 app.use('/register', registerRoute)
 app.use('/authrequired', authRoute)
+
 
 
 // Run server
