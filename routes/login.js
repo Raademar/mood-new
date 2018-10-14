@@ -14,13 +14,13 @@ router.get('/', function(req, res){
 })
 
 // Login Process
-router.post('/', function(req, res, next){
-  passport.authenticate('local', {
-    successRedirect:'/',
-    failureRedirect:'/login',
-    failureFlash: true
-  })(req, res, next);
-});
+router.post('/', 
+  passport.authenticate('local'), 
+    function(req, res) {
+      console.log(`${req.user.email} logged in`)
+      res.redirect('/')
+    }
+)
 
 
 module.exports = router
