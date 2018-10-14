@@ -34,6 +34,7 @@ db.on('error', function(err){
 
 // Init app
 const app = express()
+app.set('view engine', 'pug')
 app.use(express.static('public'))
 app.use(expressValidator())
 // Body parser middleware
@@ -55,6 +56,11 @@ require('./config/passport')(passport)
 app.use(passport.initialize())
 app.use(passport.session())
 
+app.get('*', function(req, res, next){
+  res.locals.user = req.user || null;
+  next()
+})
+
 
 // set up routes & models
 const indexRoute = require('./routes/index')
@@ -66,6 +72,7 @@ const loginRoute = require('./routes/login')
 const logoutRoute = require('./routes/logout')
 const registerRoute = require('./routes/register')
 const authRoute = require('./routes/auth')
+const testRoute = require('./routes/test')
 
 app.use('/', indexRoute)
 app.use('/profile', profileRoute)
@@ -76,6 +83,7 @@ app.use('/login', loginRoute)
 app.use('/logout', logoutRoute)
 app.use('/register', registerRoute)
 app.use('/authrequired', authRoute)
+app.use('/test', testRoute)
 
 
 
