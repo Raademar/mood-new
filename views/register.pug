@@ -1,0 +1,41 @@
+extends layout
+
+block content
+  section.first-section
+    nav
+      #navigation-menu
+        h2#nav-logo
+          a(href='/') H'sYM?
+        ul#login-links
+          if user
+            li
+              a#login-btn.btn(href='/profile') Moods
+              a#logout-btn.btn(href='/logout') Logout
+          else
+            li
+              a#login-btn.btn(href='/login') Login
+            li
+              a#login-btn.btn(href='/register') Register
+        ul#login-links-icons-small-screens
+          li
+            a#login-btn-icon(href='#')
+              i.icon.ion-md-person.icon-padding
+          li
+            a#signup-btn-icon(href='#')
+              i.icon.ion-md-person-add.icon-padding
+          li
+    != messages('message', locals)
+    if errors
+      each error, i in errors
+        div
+         .responseTextError #{error.msg}
+    .sign-up-container
+      .sign-up-inner
+        .responseText
+        input#user-email(type='email', name='email', placeholder='Email')
+        input#user-password(type='password', name='password', placeholder='Password')
+        input#user-password2(type='password', name='password2', placeholder='Verify password')
+        button#submit-register.btn-register(type='submit') Register
+
+  script
+    include ../public/dist/register.js

@@ -5,12 +5,9 @@ const LocalStrategy = require('passport-local').Strategy
 const router = express.Router()
 const indexRoute = require('./index')
 
-const options = {
-  root: 'public'
-}
 
 router.get('/', function(req, res){
-  res.sendFile('/login.html', options)
+  res.render('login')
 })
 
 // Login Process

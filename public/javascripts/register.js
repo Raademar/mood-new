@@ -23,21 +23,16 @@ function postData(){
       
     },
     redirect: 'follow',
-  }).then(res => res.json())
-  .then(function(response){ 
-    if(response.message){
-      registerResponseText.classList.toggle('.responseText')
-      registerResponseText.classList.add('responseTextSuccess')
-      registerResponseText.textContent = (JSON.stringify(response.message))
-      setTimeout(function(){
-        window.location.replace("/index.html")
-      }, 3000)
-    } else if(response[0].msg){
-      registerResponseText.classList.toggle('.responseText')
-      registerResponseText.classList.add('responseTextError')
-      registerResponseText.textContent = (JSON.stringify(response[0].msg))
-    }
   })
+  // .then(function(response){ 
+  //   if(response.status === 200 || response.status === 302){
+  //     setTimeout(() => {
+  //       window.location.replace('/login')
+  //     }, 2000);
+  //   } else {
+  //       res.redirect('/register')
+  //   }
+  // })
   .catch(error => console.error('This is the response from the server. Error:', error))
 }
 

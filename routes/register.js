@@ -5,15 +5,12 @@ const passport = require('passport')
 const router = express.Router()
 
 
-const options = {
-  root: 'public'
-}
 const curDate = new Date().toJSON().slice(0,10).replace(/-/g,'/');
 let User = require('./../db/models/users')
 
 // Register form
 router.get('/', function(req, res){
-  res.sendFile('/register.html', options)
+  res.render('register')
 })
 
 // Post to register function
@@ -29,11 +26,11 @@ router.post('/', async function(req, res){
   req.checkBody('password2', 'Passwords do not match').equals(req.body.password)
 
   let errors = req.validationErrors()
-  let msg
+  
   if(errors) {
-    ({ msg } = errors[0])
-    console.log(msg)
-    res.status(500).send(errors)
+    res.render('register', {
+      errors: errors
+    })
   } else {
     let user = new User({
       email: email,
@@ -49,10 +46,11 @@ router.post('/', async function(req, res){
         user.password = hash
         user.save(function(err){
           if (err) {
-            res.status(500).send(error)
+            console.log(err)
             return
           } else {
-            res.status(200).send({message: "User saved okey"})
+            req.flash('success', 'You are now registered and can log')
+            res.redirect('/login')
             console.log(`User ${user.email} registered and saved to database.`)
           }
         })

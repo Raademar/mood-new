@@ -147,7 +147,7 @@ TypeWriter.prototype.type = function() {
   if(this.isDeleting) {
     // Delete a character
     this.txt = fullTxt.substring(0, this.txt.length - 1)
-    // Hide the cursor when typing
+    // Hide the cursor when deleting
     cursor = ''
   } else {
     // Add a character
