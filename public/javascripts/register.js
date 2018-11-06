@@ -24,15 +24,21 @@ function postData(){
     },
     redirect: 'follow',
   })
-  // .then(function(response){ 
-  //   if(response.status === 200 || response.status === 302){
-  //     setTimeout(() => {
-  //       window.location.replace('/login')
-  //     }, 2000);
-  //   } else {
-  //       res.redirect('/register')
-  //   }
-  // })
+  .then(function(response){
+    return response.json()
+  })
+  .then(function(json){
+    if(json.length > 0){
+      json.forEach(res => {
+        console.log(res);
+        registerResponseText.classList.add('responseTextError')
+        registerResponseText.textContent = res.msg
+      })
+    }else {
+      registerResponseText.classList.add('responseTextSuccess')
+      registerResponseText.textContent = json.msg
+    }
+  }) 
   .catch(error => console.error('This is the response from the server. Error:', error))
 }
 

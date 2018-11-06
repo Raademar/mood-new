@@ -18,44 +18,51 @@ router.post('/', async function(req, res){
 
   const email = req.body.email;
   const password = req.body.password;
-  const password2 = req.body.password2;
-
-  req.checkBody('email', 'Email is required').notEmpty()
-  req.checkBody('email', 'Email is not valid').isEmail()
-  req.checkBody('password', 'Password is required').notEmpty()
-  req.checkBody('password2', 'Passwords do not match').equals(req.body.password)
-
-  let errors = req.validationErrors()
+  try {
   
-  if(errors) {
-    res.render('register', {
-      errors: errors
-    })
-  } else {
-    let user = new User({
-      email: email,
-      password: password,
-      date: curDate,
-    })
-
-    await bcrypt.genSalt(10, function(err, salt){
-      bcrypt.hash(user.password, salt, function(err, hash){
-        if(err) {
-          console.log(err)
-        }
-        user.password = hash
-        user.save(function(err){
-          if (err) {
+    req.checkBody('email', 'Email is required').notEmpty()
+    req.checkBody('email', 'Email is not valid').isEmail()
+    req.checkBody('password', 'Password is required').notEmpty()
+    req.checkBody('password2', 'Passwords do not match').equals(req.body.password)
+    
+    let errors = req.validationErrors()
+    console.log(errors)
+    let successMessage = {
+      msg: 'Registration was successfull!'
+    }
+    if(errors) {
+      errors.forEach(error => {
+        console.log(error)
+      })
+      res.send(errors)
+    } else {
+      let user = new User({
+        email: email,
+        password: password,
+        date: curDate,
+      })
+  
+      await bcrypt.genSalt(10, function(err, salt){
+        bcrypt.hash(user.password, salt, function(err, hash){
+          if(err) {
             console.log(err)
-            return
-          } else {
-            req.flash('success', 'You are now registered and can log')
-            res.redirect('/login')
-            console.log(`User ${user.email} registered and saved to database.`)
           }
+          user.password = hash
+          user.save(function(err){
+            if (err) {
+              console.log(err)
+              return
+            } else {
+              req.flash('success', 'You are now registered and can log')
+              res.send(successMessage)
+              console.log(`User ${user.email} registered and saved to database.`)
+            }
+          })
         })
       })
-    })
+    }
+  } catch (err) {
+      next(err)
   }
 })
 
