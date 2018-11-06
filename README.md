@@ -24,7 +24,7 @@ npm run webpack
 ```
 * Start server with 
 ```
-nodemon app
+npm start
 ```
 
 
