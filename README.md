@@ -12,8 +12,7 @@ Using mongoDB with Mongoose. Download mongoDB and start an instance up using loc
 ```
  npm install
 ```
-* Start up a MongoDB instance
-For macOS in terminal simply type
+* Start up a MongoDB instance. For macOS in terminal simply type
 ```
 mongod
 ```
