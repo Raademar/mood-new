@@ -13,11 +13,11 @@ Using mongoDB with Mongoose. Download mongoDB and start an instance up using loc
  npm install
 ```
 * Start up a MongoDB instance
-** For macOS in terminal simply type
+## For macOS in terminal simply type
 ```
 mongod
 ```
-** For Windows start up a terminal and run
+## For Windows start up a terminal and run
 ```
 "C:/PATH_TO/MONGO/MONGODB/"
 ```
