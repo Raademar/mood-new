@@ -18,17 +18,14 @@ router.post('/', function(req, res){
 })
   mood.save()
   .then(response => {
-    req.user._moods.push(mood)
-    console.log(response)
-    req.user._mood.push(response)
+    user.populate()
     console.log('item saved to database!')
   })
   .catch(error => {
     console.log(error, 'not working.. this far')
     res.status(400).send('unable to save to database.')
   })
-
-    res.redirect('/')
+    res.redirect('index')
 })
 
 module.exports = router
