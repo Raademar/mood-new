@@ -2,6 +2,11 @@ const mongoose = require('mongoose')
 
 // Mood Schema
 let moodSchema = mongoose.Schema({
+  author: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Users',
+    required: true,
+  },
   mood:{
     type: Number,
     required: true,

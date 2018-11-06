@@ -184,11 +184,11 @@ TypeWriter.prototype.type = function() {
 // Init on DOM Load
 document.addEventListener('DOMContentLoaded', init)
 
-// Init app
-// function init() {
-//   const txtElement = document.querySelector('.main-header')
-//   const words = JSON.parse(txtElement.getAttribute('data-words'))
-//   const wait = txtElement.getAttribute('data-wait')
-//   // Init Typewriter
-//   new TypeWriter(txtElement, words, wait)
-// }
+//Init app
+function init() {
+  const txtElement = document.querySelector('.main-header')
+  const words = JSON.parse(txtElement.getAttribute('data-words'))
+  const wait = txtElement.getAttribute('data-wait')
+  // Init Typewriter
+  new TypeWriter(txtElement, words, wait)
+}

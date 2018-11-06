@@ -2,6 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const bcrypt = require('bcryptjs')
 const passport = require('passport')
+const mongoose = require('mongoose')
 const router = express.Router()
 
 
@@ -37,6 +38,7 @@ router.post('/', async function(req, res){
     } else {
       
       let user = new User({
+        _id: new mongoose.Types.ObjectId(),
         email: email,
         password: password,
         date: curDate,
@@ -62,7 +64,7 @@ router.post('/', async function(req, res){
       })
     }
   } catch (err) {
-      next(err)
+      console.log(err)
   }
 })
 

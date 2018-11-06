@@ -7,15 +7,20 @@ const options = {
 }
 const curDate = new Date().toJSON().slice(0,10).replace(/-/g,'/');
 let Mood = require('./../db/models/moods')
+let user = require('./../db/models/users')
 
 router.post('/', function(req, res){
   let mood = new Mood({
-  mood: req.body.mood,
-  note: req.body.note,
-  date: curDate,
+    author: req.user._id,  
+    mood: req.body.mood,
+    note: req.body.note,
+    date: curDate,
 })
   mood.save()
   .then(response => {
+    req.user._moods.push(mood)
+    console.log(response)
+    req.user._mood.push(response)
     console.log('item saved to database!')
   })
   .catch(error => {

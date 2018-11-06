@@ -33,7 +33,7 @@ function postData(){
         registerResponseText.classList.add('responseTextError')
         registerResponseText.textContent = res.msg
       })
-    }else {
+    } else {
       registerResponseText.classList.add('responseTextSuccess')
       registerResponseText.textContent = json.msg
       setTimeout(() => {

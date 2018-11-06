@@ -15,7 +15,7 @@ router.post('/',
   passport.authenticate('local'), 
     function(req, res) {
       console.log(`${req.user.email} logged in`)
-      res.redirect('/')
+      res.send(req.user)
     }
 )
 

@@ -20,12 +20,11 @@ function postUserData(){
     },
     redirect: 'follow',
   }).then(function(response){
-    if(response.status === 200) {
-      window.location.replace('/')
-    }else {
-      console.log('error!')
-    }
-  })
+      return response.json()
+    })
+    .then(function(res){
+      console.log(res)  
+    })
 }
 // redirect depending on status from server.
 
