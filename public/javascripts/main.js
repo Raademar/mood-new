@@ -10,11 +10,6 @@ const loginButton = document.querySelector('#login-btn')
 
 
 
-// Check if user is logged in.
-/* if(user){
-  loginButton.style.display = 'none'
-} */
-
 // Function for toggling the modal >>> MOVE MODAL HERE <<<
 function enterFeelings(e) {
   e.preventDefault();
@@ -190,10 +185,10 @@ TypeWriter.prototype.type = function() {
 document.addEventListener('DOMContentLoaded', init)
 
 // Init app
-function init() {
-  const txtElement = document.querySelector('.main-header')
-  const words = JSON.parse(txtElement.getAttribute('data-words'))
-  const wait = txtElement.getAttribute('data-wait')
-  // Init Typewriter
-  new TypeWriter(txtElement, words, wait)
-}
+// function init() {
+//   const txtElement = document.querySelector('.main-header')
+//   const words = JSON.parse(txtElement.getAttribute('data-words'))
+//   const wait = txtElement.getAttribute('data-wait')
+//   // Init Typewriter
+//   new TypeWriter(txtElement, words, wait)
+// }

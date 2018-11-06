@@ -20,7 +20,6 @@ function postData(){
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
-      
     },
     redirect: 'follow',
   })
@@ -37,6 +36,9 @@ function postData(){
     }else {
       registerResponseText.classList.add('responseTextSuccess')
       registerResponseText.textContent = json.msg
+      setTimeout(() => {
+        window.location.href = '/login'
+      }, 1000);
     }
   }) 
   .catch(error => console.error('This is the response from the server. Error:', error))
