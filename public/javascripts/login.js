@@ -19,8 +19,7 @@ function postUserData(){
     },
     redirect: 'follow',
   }).then(function(response){
-      console.log(response)
-      return response.json()
+    return response.json()
     })
     .then(function(res){
       console.log(res)  

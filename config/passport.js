@@ -4,11 +4,10 @@ const bcrypt = require('bcryptjs')
 
 module.exports = function(passport){
   // Local Strategy
-  passport.use(new LocalStrategy({ 
-    passReqToCallback: true,
+  passport.use(new LocalStrategy({
     usernameField: 'email'
   },
-  (req, email, password, done) => {
+  (email, password, done) => {
   // Match email
     let query = { email : email }
     User.findOne(query, function(err, user){
@@ -16,9 +15,11 @@ module.exports = function(passport){
         return done(err) 
       }
       if(!user) {
+        console.log('user not found')
         return done(null, false, {message: 'Wrong username or password.'})
       }
-      if(!user.verifyPassword(password)) {
+      if(user.password !== password) {
+        console.log('password is wrong')
         return done(null, false)
       }
 

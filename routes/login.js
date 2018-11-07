@@ -12,10 +12,10 @@ router.get('/', function(req, res){
 
 // Login Process
 router.post('/', 
-  passport.authenticate('local', { failureRedirect: '/login' }),
-  function(req, res) {
-    res.redirect('login');
-  })
+  passport.authenticate('local', { 
+    successRedirect: '/',
+    failureRedirect: '/login' }),
+)
 
 
 module.exports = router

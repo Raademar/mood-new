@@ -18,8 +18,7 @@ router.post('/', function(req, res){
 })
   mood.save()
   .then(response => {
-    user.populate()
-    console.log('item saved to database!')
+    console.log(`${response} saved to database`)
   })
   .catch(error => {
     console.log(error, 'not working.. this far')
