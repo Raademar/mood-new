@@ -19,10 +19,15 @@ function postUserData(){
     },
     redirect: 'follow',
   }).then(function(response){
+    console.log(response) 
     return response.json()
     })
     .then(function(res){
-      console.log(res)  
+      if(json.length > 0){
+        json.forEach(res => {
+          console.log(res);
+        })
+      }
     })
 }
 // redirect depending on status from server.
