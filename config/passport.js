@@ -4,17 +4,23 @@ const bcrypt = require('bcryptjs')
 
 module.exports = function(passport){
   // Local Strategy
-  passport.use(new LocalStrategy(
-    { passReqToCallback: true,
-      usernameField: 'email' },
-    (req, email, password, done) => {
-  // Match Username
-  let query = {email:email}
-  User.findOne(query, function(err, user){
-    if(err) throw err
-    if(!user){
-      return done(null, false, {message: 'Wrong username or password.'})
-    }
+  passport.use(new LocalStrategy({ 
+    passReqToCallback: true,
+    usernameField: 'email'
+  },
+  (req, email, password, done) => {
+  // Match email
+    let query = { email : email }
+    User.findOne(query, function(err, user){
+      if(err) { 
+        return done(err) 
+      }
+      if(!user) {
+        return done(null, false, {message: 'Wrong username or password.'})
+      }
+      if(!user.verifyPassword(password)) {
+        return done(null, false)
+      }
 
     // Match Password
     bcrypt.compare(password, user.password, function(err, isMatch){

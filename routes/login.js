@@ -12,12 +12,10 @@ router.get('/', function(req, res){
 
 // Login Process
 router.post('/', 
-  passport.authenticate('local'), 
-    function(req, res) {
-      console.log(`${req.user.email} logged in`)
-      res.send(req.user)
-    }
-)
+  passport.authenticate('local', { failureRedirect: '/login' }),
+  function(req, res) {
+    res.redirect('login');
+  })
 
 
 module.exports = router

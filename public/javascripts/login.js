@@ -16,10 +16,10 @@ function postUserData(){
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
-      
     },
     redirect: 'follow',
   }).then(function(response){
+      console.log(response)
       return response.json()
     })
     .then(function(res){

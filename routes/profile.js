@@ -12,11 +12,18 @@ async function listUserMoods(user) {
     .populate('author', 'email')
     .select('mood author')
   console.log(moods)
+  if(!moods) {
+    console.log('No Moods registered.')
+  }
 }
 
 router.get('/', function(req, res){
   if(req.isAuthenticated()) {
-    listUserMoods(req.user)
+    try {
+      listUserMoods(req.user)
+    } catch(err) { 
+        console.log(err)
+    }
     res.sendFile('/profile.html', options)
   }else {
     res.redirect('/login.html')
