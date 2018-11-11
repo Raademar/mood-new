@@ -1,6 +1,7 @@
 const submitNewUser = document.querySelector('#submit-register')
 const userEmail = document.querySelector('#user-email')
 const userPassword = document.querySelector('#user-password')
+const registerResponseText = document.querySelector('.responseText')
 
 
 // Function for passing user info to the login route.
@@ -19,16 +20,21 @@ function postUserData(){
     },
     redirect: 'follow',
   }).then(function(response){
-    console.log(response) 
-    return response.json()
-    })
-    .then(function(res){
-      if(json.length > 0){
-        json.forEach(res => {
-          console.log(res);
-        })
+    if(response.status === 401){
+      return response.json()
+    } else {
+      return response
+    }
+  })
+  .then(function(json){
+    if(json.message){
+      console.log(json);
+      registerResponseText.classList.add('responseTextError')
+      registerResponseText.textContent = json.message
+    } else {
+        window.location.href = '/'
       }
-    })
+  })
 }
 // redirect depending on status from server.
 
