@@ -8,13 +8,6 @@ const UserSchema = mongoose.Schema({
     type: String,
     required: true,
     unique: true,
-    validate: function(v) {
-      return new Promise(function(resolve, reject) {
-        setTimeout(function() {
-          resolve(false);
-        }, 5);
-      });
-    }
   },
   password: {
     type: String,

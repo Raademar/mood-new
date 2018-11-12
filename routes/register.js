@@ -34,42 +34,56 @@ router.post('/', async function(req, res){
       .equals(req.body.password)
     
     let errors = req.validationErrors()
-    let successMessage = {
-      msg: 'Registration was successfull!'
-    }
-    if(errors) {
-      errors.forEach(error => {
-        console.log(error)
-      })
-      res.send(errors)
-    } else {
-      
-      let user = new User({
-        _id: new mongoose.Types.ObjectId(),
-        email: email,
-        password: password,
-        date: curDate,
-      })
-  
-      await bcrypt.genSalt(10, function(err, salt){
-        bcrypt.hash(user.password, salt, function(err, hash){
-          if(err) {
-            console.log(err)
-          }
-          user.password = hash
-          user.save(function(err){
-            if (err) {
-              console.log(err)
-              return
-            } else {
-              req.flash('success', 'You are now registered and can log')
-              res.send(successMessage)
-              console.log(`User ${user.email} registered and saved to database.`)
-            }
+    //a simple if/else to check if email already exists in db
+    User.findOne({ email: req.body.email }, async function(err, user) {
+      if(err) {
+        //handle error here
+      }
+
+      //if a user was found, that means the user's email matches the entered email
+      if (user) {
+        let err = new Error('A user with that email has already registered. Please use a different email..')
+        err.status = 400
+        return next(err)
+      } else {
+        // If no user with the given email was found, continue execution.
+        let successMessage = {
+          msg: 'Registration was successfull!'
+        }
+        if(errors) {
+          errors.forEach(error => {
+            console.log(error)
           })
-        })
-      })
-    }
+          res.send(errors)
+        } else {
+          let user = new User({
+            _id: new mongoose.Types.ObjectId(),
+            email: email,
+            password: password,
+            date: curDate,
+          })
+      
+          await bcrypt.genSalt(10, function(err, salt){
+            bcrypt.hash(user.password, salt, function(err, hash){
+              if(err) {
+                console.log(err)
+              }
+              user.password = hash
+              user.save(function(err){
+                if (err) {
+                  console.log(err)
+                  return
+                } else {
+                  req.flash('success', 'You are now registered and can log')
+                  res.send(successMessage)
+                  console.log(`User ${user.email} registered and saved to database.`)
+                }
+              })
+            })
+          })
+        }
+      }
+    })
   } catch (err) {
       console.log(err)
   }
