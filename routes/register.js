@@ -21,11 +21,17 @@ router.post('/', async function(req, res){
   const password = req.body.password;
   try {
   
-    req.checkBody('email', 'Email is required').notEmpty()
-    req.checkBody('email', 'Email is not valid').isEmail().normalizeEmail()
-    req.checkBody('password', 'Password is required').notEmpty()
-    req.checkBody('password', 'Password need to be at least 8 characters long.').isLength({ min: 8 })
-    req.checkBody('password2', 'Passwords do not match').equals(req.body.password)
+    req.checkBody('email', 'Email is required')
+      .notEmpty()
+    req.checkBody('email', 'Email is not valid')
+      .isEmail()
+      .normalizeEmail()
+    req.checkBody('password', 'Password is required')
+      .notEmpty()
+    req.checkBody('password', 'Password need to be at least 8 characters long.')
+      .isLength({ min: 8 })
+    req.checkBody('password2', 'Passwords do not match')
+      .equals(req.body.password)
     
     let errors = req.validationErrors()
     let successMessage = {
