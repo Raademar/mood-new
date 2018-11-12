@@ -10,6 +10,7 @@ mode: 'development',
     profile: './public/javascripts/getMood.js',
     register: './public/javascripts/register.js',
     login: './public/javascripts/login.js',
+    submitMood: './public/javascripts/submitMood.js',
   },
   output: {
     filename: '[name].js',

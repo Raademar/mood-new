@@ -36,20 +36,35 @@ block content
       .modal
         .modal-content
           span.close-button ×
-          #mood-smileys.animated.hide
-            #first-mood-smiley.animated.hide.smiley(data-mood='5')
-              img(src='/images/personal-feelings.png', alt='first-smileyface')
-            #second-mood-smiley.animated.hide.smiley(data-mood='4')
-              img(src='/images/smiley.png', alt='second-smileyface')
-            #third-mood-smiley.animated.hide.smiley(data-mood='3')
-              img(src='/images/smiley.png', alt='thrid-smileyface')
-            #fourth-mood-smiley.animated.hide.smiley(data-mood='2')
-              img(src='/images/smiley.png', alt='fourth-smileyface')
-            #fifth-mood-smiley.animated.hide.smiley(data-mood='1')
-              img(src='/images/smiley.png', alt='fifth-smileyface')
-            #text-area-feelings.animated.hide
-              textarea#mood-note(name='note', cols='60', rows='5', placeholder='Note something about your day.')
-              button#submit-feelings.btn-text-area(type='submit') Submit todays feelings!
+          if user
+            #mood-smileys.animated.hide
+              #first-mood-smiley.animated.hide.smiley(data-mood='5')
+                img(src='/images/personal-feelings.png', alt='first-smileyface')
+              #second-mood-smiley.animated.hide.smiley(data-mood='4')
+                img(src='/images/smiley.png', alt='second-smileyface')
+              #third-mood-smiley.animated.hide.smiley(data-mood='3')
+                img(src='/images/smiley.png', alt='thrid-smileyface')
+              #fourth-mood-smiley.animated.hide.smiley(data-mood='2')
+                img(src='/images/smiley.png', alt='fourth-smileyface')
+              #fifth-mood-smiley.animated.hide.smiley(data-mood='1')
+                img(src='/images/smiley.png', alt='fifth-smileyface')
+              #text-area-feelings.animated.hide
+                textarea#mood-note(name='note', cols='60', rows='5', placeholder='Note something about your day.')
+                button#submit-feelings.btn-text-area(type='submit') Submit todays feelings!
+            script
+              include ../public/dist/submitMood.js
+          else 
+            if errors
+              each error, i in errors
+                p #{error.msg}
+            .sign-up-container
+              .sign-up-inner
+                .responseText
+                input#user-email(type='email', name='email', placeholder='Email')
+                input#user-password(type='password', name='password', placeholder='Password')
+                button#submit-register.btn-register(type='submit') Login
+              script
+                include ../public/dist/login.js
     .info-box
       .info-box-inner
         p Read more about us below
@@ -112,7 +127,3 @@ block content
                 |                   Learn more about our services
         p.card-paragraph How is the world feeling right now? With us you can keep track!
         button.btn-card Check up on the world!
-
-
-  script
-    include ../public/dist/index.js
