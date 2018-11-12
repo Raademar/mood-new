@@ -28,7 +28,6 @@ function postUserData(){
   })
   .then(function(json){
     if(json.message){
-      console.log(json);
       registerResponseText.classList.add('responseTextError')
       registerResponseText.textContent = json.message
     } else {

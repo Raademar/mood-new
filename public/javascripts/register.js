@@ -31,7 +31,7 @@ function postData(){
       json.forEach(res => {
         console.log(res);
         registerResponseText.classList.add('responseTextError')
-        registerResponseText.textContent = res.msg
+        registerResponseText.textContent += res.msg
       })
     } else {
       registerResponseText.classList.add('responseTextSuccess')
