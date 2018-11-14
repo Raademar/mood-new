@@ -10,23 +10,25 @@ async function listUserMoods(user) {
   const moods = await Mood
     .find({ author : user._id })
     .populate('author', 'email')
-    .select('mood author')
-  console.log(moods)
+    .select('mood note author')
   if(!moods) {
     console.log('No Moods registered.')
   }
+  return moods
 }
 
-router.get('/', function(req, res){
+router.get('/', async function(req, res){
   if(req.isAuthenticated()) {
     try {
-      listUserMoods(req.user)
+      const moods = await listUserMoods(req.user)
+      console.log(moods)
+      res.send(moods)
     } catch(err) { 
         console.log(err)
     }
     res.sendFile('/profile.html', options)
   }else {
-    res.redirect('/login.html')
+    res.redirect('/login')
   }
 })
 

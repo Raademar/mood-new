@@ -1,6 +1,10 @@
 // Query Selectors
-const feelingsTextArea = document.querySelector('#text-area-feelings')
+const smileys = [...document.querySelectorAll('.smiley')]
 const shareFeelings = document.querySelector('#enter-mood-picker')
+const feelingsTextArea = document.querySelector('#text-area-feelings')
+const userMoodContainer = document.querySelector('#user-mood-container')
+const moodNoteTextarea = document.querySelector('#mood-note')
+const submitFeeligns = document.querySelector('#submit-feelings')
 const moodLeadText = document.querySelector('#mood-lead')
 const loginButton = document.querySelector('#login-btn')
 

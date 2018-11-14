@@ -496,6 +496,22 @@ REGISTER STYLES
   min-height: 45vh;
   color: #f9f6f0;
 }
+.sign-up-container-modal {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  width: 100vw;
+  height: auto;
+}
+
+.sign-up-inner-modal {
+  background-color: #333;;
+  border-radius: 5px;
+  width: 50vw;
+  height: auto;
+  min-height: 45vh;
+  color: #f9f6f0;
+}
 
 .responseText {
   height: 50px;
