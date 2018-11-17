@@ -33,36 +33,33 @@ router.post('/', async function(req, res){
     req.checkBody('password2', 'Passwords do not match')
       .equals(req.body.password)
     
-    let errors = req.validationErrors()
+    let errors = req.validationErrors() || {}
+    console.log(errors)
     //a simple if/else to check if email already exists in db
     User.findOne({ email: req.body.email }, async function(err, user) {
-      if(err) {
-        //handle error here
-      }
-
       //if a user was found, that means the user's email matches the entered email
       if (user) {
-        let err = new Error('A user with that email has already registered. Please use a different email..')
-        err.status = 400
-        return next(err)
+        let err = {
+          msg: 'A user with that email has already registered. Please use a different email..'
+        }
+        if(err) {
+          errors = {...err}
+        }
+        console.log(errors)
+        if(Object.keys(errors).length !== 0 || errors) {
+          res.send(errors)
+        }
       } else {
         // If no user with the given email was found, continue execution.
         let successMessage = {
-          msg: 'Registration was successfull!'
+          successmsg: 'Registration was successfull!'
         }
-        if(errors) {
-          errors.forEach(error => {
-            console.log(error)
-          })
-          res.send(errors)
-        } else {
           let user = new User({
             _id: new mongoose.Types.ObjectId(),
             email: email,
             password: password,
             date: curDate,
           })
-      
           await bcrypt.genSalt(10, function(err, salt){
             bcrypt.hash(user.password, salt, function(err, hash){
               if(err) {
@@ -81,7 +78,7 @@ router.post('/', async function(req, res){
               })
             })
           })
-        }
+        
       }
     })
   } catch (err) {

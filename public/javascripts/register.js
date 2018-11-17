@@ -27,18 +27,17 @@ function postData(){
     return response.json()
   })
   .then(function(json){
-    if(json.length > 0){
-      json.forEach(res => {
-        console.log(res);
-        registerResponseText.classList.add('responseTextError')
-        registerResponseText.textContent += res.msg
-      })
+    if(json.msg){
+      console.log(json)
+      registerResponseText.classList.add('responseTextError')
+      registerResponseText.textContent += json.msg
     } else {
+      console.log(json)
       registerResponseText.classList.add('responseTextSuccess')
-      registerResponseText.textContent = json.msg
-      setTimeout(() => {
-        window.location.href = '/login'
-      }, 1000);
+      registerResponseText.textContent = json.successmsg
+      // setTimeout(() => {
+      //   window.location.href = '/login'
+      // }, 1000);
     }
   }) 
   .catch(error => console.error('This is the response from the server. Error:', error))
