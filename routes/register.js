@@ -17,8 +17,9 @@ router.get('/', function(req, res){
 // Post to register function
 router.post('/', async function(req, res){
 
-  const email = req.body.email;
-  const password = req.body.password;
+  const email = req.body.email
+  const password = req.body.password
+
   try {
   
     req.checkBody('email', 'Email is required')
@@ -33,27 +34,33 @@ router.post('/', async function(req, res){
     req.checkBody('password2', 'Passwords do not match')
       .equals(req.body.password)
     
-    let errors = req.validationErrors() || {}
+    let errors = req.validationErrors()
     console.log(errors)
+    if(Object.keys(errors).length !== 0) {
+      console.log('bajs')
+      res.send(errors)
+      return
+    }
     //a simple if/else to check if email already exists in db
     User.findOne({ email: req.body.email }, async function(err, user) {
       //if a user was found, that means the user's email matches the entered email
       if (user) {
+        let errors = {}
         let err = {
           msg: 'A user with that email has already registered. Please use a different email..'
         }
         if(err) {
           errors = {...err}
         }
-        console.log(errors)
-        if(Object.keys(errors).length !== 0 || errors) {
+        if(Object.keys(errors).length !== 0) {
+          console.log(errors, 'tjofräs')
           res.send(errors)
         }
       } else {
-        // If no user with the given email was found, continue execution.
-        let successMessage = {
+          // If no user with the given email was found, continue execution.
+          let successMessage = {
           successmsg: 'Registration was successfull!'
-        }
+          }
           let user = new User({
             _id: new mongoose.Types.ObjectId(),
             email: email,
@@ -71,19 +78,17 @@ router.post('/', async function(req, res){
                   console.log(err)
                   return
                 } else {
-                  req.flash('success', 'You are now registered and can log')
                   res.send(successMessage)
                   console.log(`User ${user.email} registered and saved to database.`)
                 }
               })
             })
           })
-        
-      }
+        }
     })
   } catch (err) {
       console.log(err)
-  }
+    }
 })
 
 module.exports = router
