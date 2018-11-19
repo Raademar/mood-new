@@ -1,10 +1,10 @@
-extends layout
+extends profileLayout
 
 block content
 	section.profile-landing
 		.content
 			.title
-				h1 your mood
+				h1 Welcome, #{user.email}!
 			.subheading
 				h3 see how you have been feeling lately
 			.paragraph
@@ -22,6 +22,9 @@ block content
 					| week
 					input#radio-week(type='radio', name='radio', value='week', checked='checked')
 					span.checkmark
+			.quotes
+				for mood in moods
+					p= mood.note
 			.chart-holder
 				.lineChartContainer
 					canvas#lineChart

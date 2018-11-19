@@ -53,7 +53,6 @@ router.post('/', async function(req, res){
           errors = {...err}
         }
         if(Object.keys(errors).length !== 0) {
-          console.log(errors, 'tjofräs')
           res.send(errors)
         }
       } else {

@@ -51,8 +51,6 @@ block content
               #text-area-feelings.animated.hide
                 textarea#mood-note(name='note', cols='60', rows='5', placeholder='Note something about your day.')
                 button#submit-feelings.btn-text-area(type='submit') Submit todays feelings!
-            script
-              include ../public/dist/submitMood.js
           else 
             if errors
               each error, i in errors
@@ -63,8 +61,6 @@ block content
                 input#user-email(type='email', name='email', placeholder='Email')
                 input#user-password(type='password', name='password', placeholder='Password')
                 button#submit-register.btn-register(type='submit') Login
-              script
-                include ../public/dist/login.js
     .info-box
       .info-box-inner
         p Read more about us below
@@ -129,3 +125,9 @@ block content
         button.btn-card Check up on the world!
   script
     include ../public/dist/index.js
+  if user
+    script
+      include ../public/dist/submitMood.js
+  else 
+    script
+      include ../public/dist/login.js

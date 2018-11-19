@@ -16,9 +16,11 @@ async function listUserMoods(user) {
 router.get('/', async function(req, res){
   if(req.isAuthenticated()) {
     try {
-      const moods = await listUserMoods(req.user)
-      console.log(moods)
-      res.render('profile', moods)
+      const moodsArr = await listUserMoods(req.user)
+      console.log(moodsArr)
+      res.render('profile', {
+        moods: moodsArr
+      })
     } catch(err) { 
         console.log(err)
     }

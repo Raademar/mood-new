@@ -57,8 +57,27 @@ let userMood = []
 const userMedianMood = arr => arr.reduce((a,b) => a + b, 0) / userMood.length
 
 shareFeelings.addEventListener('click', () => {
-  console.log('clicked damn button')
   enterFeelings()
+})
+
+// Assign clickListener for each smiley.
+smileys.forEach(smiley => smiley.addEventListener('click', function(){
+  smileys.forEach(item => item.classList.remove('pickedMood'))
+  event.currentTarget.classList.add('pickedMood')
+  pickedMood = parseInt(smiley.dataset.mood)
+}))
+
+// Submit feelings click listener, toggling the modals after submitted and saved in local storage.
+submitFeeligns.addEventListener('click', function(){
+  moodNote = JSON.stringify(moodNoteTextarea.value)
+  postData(pickedMood, moodNote)
+  moodNoteTextarea.value = ''
+  pickedMood = 0
+  modal.classList.remove('show-modal')
+  toggleSuccessMessage()
+  setTimeout(() => {
+    toggleSuccessMessage()
+  }, 3000)
 })
 
 // Query Selectors for the modals.
@@ -69,7 +88,8 @@ const successModal = document.querySelector('.success-modal')
 
 // Functions for toggling the modals.
 function toggleModal(){
-  modal.classList.toggle('show-modal')
+  modal.classList.add('show-modal')
+  console.log(modal)
 }
 
 function toggleSuccessMessage(){
@@ -78,7 +98,7 @@ function toggleSuccessMessage(){
 
 function windowOnClick(event) {
   if(event.target === modal) {
-    toggleModal();
+    modal.classList.remove('show-modal')
   }
 }
 
