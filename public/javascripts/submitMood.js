@@ -1,18 +1,17 @@
 const smileys = [...document.querySelectorAll('.smiley')]
 const shareFeelings = document.querySelector('#enter-mood-picker')
 const feelingsTextArea = document.querySelector('#text-area-feelings')
-const userMoodContainer = document.querySelector('#user-mood-container')
 const moodNoteTextarea = document.querySelector('#mood-note')
 const submitFeeligns = document.querySelector('#submit-feelings')
 const moodLeadText = document.querySelector('#mood-lead')
 const loginButton = document.querySelector('#login-btn')
 
+
 // Current date generator.
 const curDate = new Date().toJSON().slice(0,10).replace(/-/g,'/');
 
 // Function for toggling the modal >>> MOVE MODAL HERE <<<
-function enterFeelings(e) {
-  e.preventDefault()
+function enterFeelings() {
   setInterval(() => {
     smileys.forEach(function(item){
       item.classList.remove('hide'), item.classList.add('fadeInLeft')
@@ -57,7 +56,10 @@ let userMood = []
 // Get the median mood value from the userMood array.
 const userMedianMood = arr => arr.reduce((a,b) => a + b, 0) / userMood.length
 
-shareFeelings.addEventListener('click', enterFeelings);
+shareFeelings.addEventListener('click', () => {
+  console.log('clicked damn button')
+  enterFeelings()
+})
 
 // Query Selectors for the modals.
 const modal = document.querySelector('.modal')

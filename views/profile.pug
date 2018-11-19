@@ -1,0 +1,28 @@
+extends layout
+
+block content
+	section.profile-landing
+		.content
+			.title
+				h1 your mood
+			.subheading
+				h3 see how you have been feeling lately
+			.paragraph
+				p choose from the alternatives below
+			.radios
+				label.container
+					| year
+					input#radio-year(type='radio', name='radio', value='year', checked='checked')
+					span.checkmark
+				label.container
+					| month
+					input#radio-month(type='radio', name='radio', value='month', checked='checked')
+					span.checkmark
+				label.container
+					| week
+					input#radio-week(type='radio', name='radio', value='week', checked='checked')
+					span.checkmark
+			.chart-holder
+				.lineChartContainer
+					canvas#lineChart
+			script(type='text/javascript', src='/dist/profile.js')

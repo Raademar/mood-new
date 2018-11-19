@@ -18,10 +18,10 @@ block content
               a#login-btn.btn(href='/register') Register
         ul#login-links-icons-small-screens
           li
-            a#login-btn-icon(href='#')
+            a#login-btn-icon(href='/login')
               i.icon.ion-md-person.icon-padding
           li
-            a#signup-btn-icon(href='#')
+            a#signup-btn-icon(href='/register')
               i.icon.ion-md-person-add.icon-padding
           li
     .header
@@ -51,6 +51,8 @@ block content
               #text-area-feelings.animated.hide
                 textarea#mood-note(name='note', cols='60', rows='5', placeholder='Note something about your day.')
                 button#submit-feelings.btn-text-area(type='submit') Submit todays feelings!
+            script
+              include ../public/dist/submitMood.js
           else 
             if errors
               each error, i in errors
@@ -127,6 +129,3 @@ block content
         button.btn-card Check up on the world!
   script
     include ../public/dist/index.js
-  if user
-    script
-      include ../public/dist/submitMood.js
