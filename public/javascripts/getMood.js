@@ -1,3 +1,11 @@
+fetch('/profile')
+  .then(function(response) {
+    return response
+  })
+  .then(function(myJson) {
+    console.log(myJson, 'nothing?')
+  })
+
 // import Chart from'chart.js'
 
 // //const data = moods

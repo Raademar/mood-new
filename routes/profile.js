@@ -10,16 +10,17 @@ async function listUserMoods(user) {
   if(!moods) {
     console.log('No Moods registered.')
   }
+
   return moods
 }
 
 router.get('/', async function(req, res){
   if(req.isAuthenticated()) {
     try {
-      const moodsArr = await listUserMoods(req.user)
-      console.log(moodsArr)
+      let moods = await listUserMoods(req.user)
+      console.log(moods)
       res.render('profile', {
-        moods: moodsArr
+        moods: moods
       })
     } catch(err) { 
         console.log(err)
