@@ -16,7 +16,7 @@ mongod
 ```
 For Windows start up a terminal and run
 ```
-"C:/PATH_TO/MONGO/MONGODB/"
+"C:/PATH_TO/server/bin/VERSION_OF_MONGODB/MONGOD"
 ```
 * Run webpack with
 ```
