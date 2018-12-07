@@ -41,20 +41,15 @@ body {
   font-weight: 100;
 }
 .paragraph {
-  align-self: flex-start;
-  padding-left: 1rem;
+
 }
 .paragraph p {
 font-weight: 100;
 }
 .radios {
-  align-self: flex-start;
-  padding-left: 1rem;
 }
 
 .quotes {
-  padding-left: 1rem;
-  align-self: flex-start;
 }
 
 .chart-holder {

@@ -18,6 +18,8 @@ router.get('/', async function(req, res){
   if(req.isAuthenticated()) {
     try {
       let moods = await listUserMoods(req.user)
+        // Iterate over each mood.mood and sum it up to averageMood.
+        // .then(moods.map())
       console.log(moods)
       res.render('profile', {
         moods: moods

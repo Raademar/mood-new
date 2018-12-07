@@ -5,10 +5,14 @@ block content
 		.content
 			.title
 				h1 Welcome, #{user.email}!
-			.subheading
-				h3 see how you have been feeling lately
+			.quotes
+				for mood in moods
+					p= mood.note
 			.paragraph
 				p choose from the alternatives below
+			.average-mood
+				for mood in moods
+					span= mood.average
 			.radios
 				label.container
 					| year
@@ -22,9 +26,6 @@ block content
 					| week
 					input#radio-week(type='radio', name='radio', value='week', checked='checked')
 					span.checkmark
-			.quotes
-				for mood in moods
-					p= mood.note
 			.chart-holder
 				.lineChartContainer
 					canvas#lineChart
