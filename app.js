@@ -12,7 +12,7 @@ const LocalStrategy = require('passport-local').Strategy
 
 // Set up DB connection
 const mongoose = require('mongoose')
-mongoose.connect('mongodb://localhost:27017/mood-new', (err, res) => {
+mongoose.connect(process.env.MLABURI, (err, res) => {
   if(err) {
     console.log(err)
   }

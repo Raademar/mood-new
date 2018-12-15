@@ -2,3 +2,4 @@ node_modules
 cookie-file.txt
 sessions
 /public/dist
+.env
